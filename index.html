@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<h1>1234</h1>
+
+		<script>
+			// var // deprecated
+			// const // constant global-local
+			// let // global local
+
+			//**** Variable in js *****
+
+			//example of const
+			// can't change the value on runtime
+			const abc = 'alpha';
+			console.log(abc);
+			// example of let
+			//can change the value on runtime
+			let a = 10;
+
+			a = 20;
+
+			console.log(a);
+
+			//***** Functions in js ********
+
+			// normal function
+			const value = 'welcome';
+
+			function hello(item, interncount) {
+				console.log(`${value} ${item} ${interncount}`);
+			}
+
+			hello('to dashdub', 4);
+
+			//************** fat arrow function
+
+			const fat = (value) => {
+				console.log(`${value}`);
+			};
+
+			fat(50);
+
+			//************template literal
+
+			const xyz = 50;
+
+			console.log(`${xyz}50`);
+
+			// *************high order array methods and operators
+
+			//spread operator*************
+
+			const followers = [1, 2, 3, 4, 5];
+			const upcomingfollow = [...followers, 6];
+
+			console.log(upcomingfollow);
+
+			// for each
+
+			const colors = ['red', 'green', 'blue', 'yellow'];
+
+			colors.forEach((color) => {
+				// console.log(color);
+			});
+
+			// map
+			const colorShades = [...colors, 'lemon yellow', 'pink rose'];
+
+			const colorMappped = colorShades.map((item) => {
+				return item;
+			});
+
+			// console.log(colorMappped);
+
+			//filter
+			const brands = ['levis', 'nike', 'adidas', 'team spirit', 'woodland'];
+
+			const filteredBrands = brands.filter((value) => {
+				return value !== 'nike';
+			});
+
+			console.log(filteredBrands);
+
+			//flatMap
+			const flaten = colorShades.flatMap((item) => {
+				console.log(item);
+			});
+
+			//reduce
+
+			function sumOf(...numbers) {
+				return numbers.reduce((sum, val) => {
+					return sum + val;
+				}, 0);
+			}
+			console.log(sumOf());
+
+			//find
+			const arr = [
+				{
+					name: 'sahil',
+					age: 23,
+				},
+				{
+					name: 'aman',
+					age: 21,
+				},
+				{
+					name: 'sonu',
+					age: 21,
+				},
+				{
+					name: 'kalpesh',
+					age: 21,
+				},
+			];
+			let finder = (name) => {
+				return arr.find(function (val) {
+					return val.name === name;
+				});
+			};
+			console.log(finder('aman'));
+
+			// destructure
+
+			const obj = {
+				name: 'sahil',
+				age: 23,
+				email: 'sahilshah2497@gmail.com',
+			};
+
+			const { name, email, age } = obj;
+			console.log(name);
+			console.log(email);
+
+			const [color1] = colorShades;
+			console.log(color1);
+
+
+			
+
+
+			// let array = [1, 2, 2, 2, "a", "a", "a", 7, 8];
+			// let counts = {};
+			// let mostFrequent = [];
+			// const array2 = array.forEach((data, i) => {
+			//   let word = data;
+
+			//   if (counts[word] == undefined) {
+			//     counts[word] = 1;
+			//   } else {
+			//     counts[word] = counts[word] + 1;
+			//   }
+			//   if (mostFrequent.length <= 0) {
+			//     mostFrequent.push(counts);
+			//   }
+			// });
+			// console.log(mostFrequent);
+
+			// let colors = ['red','yellow','green']
+			// let colorshades = ['blood-red','lemon-yellow','light greeen']
+
+			// let colors1 = [...colors,...colorshades,'black','blue']
+
+			// console.log(colors1)
+
+			// let array = [1, 2, 3, 4, 5, 6];
+
+			// const mathLibrary = {
+			// 	product(...rest) {
+			// 		return this.multiply(...rest);
+			// 	},
+			// 	multiply(a, b) {
+			// 		return a * b;
+			// 	},
+			// };
+		</script>
+	</body>
+</html>

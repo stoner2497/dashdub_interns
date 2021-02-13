@@ -30,8 +30,6 @@ const Home = require('./routes/todoRoute');
 app.use('/', Home);
 
 // to connect to the port on localhost
-app.listen(PORT, () => {
-	console.log(`the server is running on port ${PORT}`);
-});
+app.listen(PORT,() => console.log(`the server is running on port ${PORT}`));
 
 //
