@@ -6,16 +6,25 @@ import {
   Text,
   StyleSheet,
   ScrollView,
+  FlatList,
+  ActivityIndicator,
 } from 'react-native';
+
+import axios from 'axios';
+import Header from '../../reuseable components/Header';
 
 export default class SecondFile extends Component {
   constructor(props) {
     super(props);
 
+    this.todoItem = [];
+
     this.state = {
       name: '',
       email: '',
+      todos: [],
       show: false,
+      loader: false,
     };
   }
 
@@ -25,39 +34,101 @@ export default class SecondFile extends Component {
     });
   };
 
-  render() {
-    const {name, show} = this.state;
-    return (
-     <ScrollView>
-          <View>
-        <TextInput
-          style={styles.input}
-          value={name}
-          onChangeText={(value) => this.setState({name: value})}
-        />
-        <TouchableOpacity style={styles.btn} onPress={this.onPressHandler.bind(this)}>
-          <Text>Show Me</Text>
-        </TouchableOpacity>
-        {show ? <Text>{name}</Text> : null}
+  componentDidMount() {
+    this.setState({
+      loader: true,
+    });
+    axios
+      .get('https://jsonplaceholder.typicode.com/todos')
+      .then((response) => {
+        this.setState({
+          todos: response.data,
+          loader: false,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  _renderItem = ({item}) => (
+    <View style={styles.todoBox}>
+      <Text style={styles.todoBoxText}>{item.title}</Text>
+      <View style={styles.textContainer}>
+        {item.completed ? (
+          <Text style={styles.Completed}>Completed</Text>
+        ) : (
+          <Text style={styles.inComplete}>Not Completed</Text>
+        )}
       </View>
-     </ScrollView>
+    </View>
+  );
+
+  render() {
+    const {name, show, todos, loader} = this.state;
+    console.log(todos);
+    return (
+      <View style={styles.Container}>
+        {todos !== null ? (
+          <>
+            <Header title="Todo List" />
+            {loader ? (
+              <View>
+                <ActivityIndicator size="large" color="black" />
+              </View>
+            ) : (
+              <FlatList data={todos} renderItem={this._renderItem} />
+            )}
+          </>
+        ) : (
+          <Text>No Todo's to show</Text>
+        )}
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  Container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   input: {
     borderWidth: 1,
-    
   },
-  btn:{
-      borderWidth:1,
-      borderColor:'yellow',
-      padding:10,
-      width:100,
-      height:50,
-      marginLeft:30,
-      borderRadius:60,
-    backgroundColor:'red'
-    }
+  btn: {
+    borderWidth: 1,
+    borderColor: 'yellow',
+    padding: 10,
+    width: 100,
+    height: 50,
+    marginLeft: 30,
+    borderRadius: 60,
+    backgroundColor: 'red',
+  },
+  todoBox: {
+    width: 400,
+    height: 100,
+    borderWidth: 0.6,
+    borderColor: 'blue',
+    padding: 10,
+    marginTop: 15,
+  },
+  todoBoxText: {
+    fontSize: 18,
+  },
+  Completed: {
+    color: 'green',
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  inComplete: {
+    color: 'red',
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  textContainer: {
+    marginTop: 20,
+  },
 });
