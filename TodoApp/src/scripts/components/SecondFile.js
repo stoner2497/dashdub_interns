@@ -12,6 +12,7 @@ import {
 
 import axios from 'axios';
 import Header from '../../reuseable components/Header';
+import {Actions} from 'react-native-router-flux';
 
 export default class SecondFile extends Component {
   constructor(props) {
@@ -39,7 +40,7 @@ export default class SecondFile extends Component {
       loader: true,
     });
     axios
-      .get('https://jsonplaceholder.typicode.com/todos')
+      .get('http://192.168.1.10/')
       .then((response) => {
         this.setState({
           todos: response.data,
@@ -51,6 +52,10 @@ export default class SecondFile extends Component {
       });
   }
 
+  onEdit = (id) => {
+    Actions.Edit({id});
+  };
+
   _renderItem = ({item}) => (
     <View style={styles.todoBox}>
       <Text style={styles.todoBoxText}>{item.title}</Text>
@@ -61,6 +66,9 @@ export default class SecondFile extends Component {
           <Text style={styles.inComplete}>Not Completed</Text>
         )}
       </View>
+      <TouchableOpacity onPress={this.onEdit.bind(this, item.id)}>
+        <Text>Edit</Text>
+      </TouchableOpacity>
     </View>
   );
 
