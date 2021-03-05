@@ -40,8 +40,9 @@ export default class SecondFile extends Component {
       loader: true,
     });
     axios
-      .get('http://192.168.1.10/')
+      .get('http://192.168.1.10:5000/')
       .then((response) => {
+        console.log(response.data, 'data.......');
         this.setState({
           todos: response.data,
           loader: false,
@@ -53,6 +54,7 @@ export default class SecondFile extends Component {
   }
 
   onEdit = (id) => {
+    console.log(id,'id');
     Actions.Edit({id});
   };
 
@@ -66,7 +68,7 @@ export default class SecondFile extends Component {
           <Text style={styles.inComplete}>Not Completed</Text>
         )}
       </View>
-      <TouchableOpacity onPress={this.onEdit.bind(this, item.id)}>
+      <TouchableOpacity onPress={this.onEdit.bind(this, item._id)}>
         <Text>Edit</Text>
       </TouchableOpacity>
     </View>

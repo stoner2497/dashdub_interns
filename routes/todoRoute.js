@@ -11,7 +11,7 @@ route.get('/', async (req, res) => {
 	try {
 		const result = await Todo.find({});
 		if (result) {
-			console.log(result);
+			res.json(result);
 		} else {
 			console.log('no result');
 		}
@@ -35,7 +35,7 @@ route.post('/add', async (req, res) => {
 		//save data using save function of mongo model instance
 		const result = await newTodo.save();
 		if (result) {
-			console.log(result);
+			res.json(result);
 		} else {
 			console.log('something went wrong');
 		}
@@ -60,6 +60,7 @@ route.post('/edit/:id', async (req, res) => {
 		);
 		if (result) {
 			console.log(result);
+			res.json(result);
 		} else {
 			console.log('no todo found');
 		}

@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
-export default function Add(props) {
+export default function Edit(props) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
@@ -17,9 +17,9 @@ export default function Add(props) {
       title,
       description,
     };
-
+    console.log(props.id)
     axios
-      .post(`http://192.168.1.10:5000/add`, data)
+      .post(`http://192.168.1.10:5000/edit/${props.id}`, data)
       .then((res) => {
         console.log(res);
         if (res.data) {
